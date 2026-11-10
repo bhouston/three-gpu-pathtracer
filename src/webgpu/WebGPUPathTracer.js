@@ -1,4 +1,4 @@
-import { Box3, DataTexture, EventDispatcher, LinearFilter, MathUtils, Vector2, Scene, PerspectiveCamera, Color, NoToneMapping, FloatType, Timer, StorageTexture, MeshBasicNodeMaterial, Matrix4, WebGPUCoordinateSystem } from 'three/webgpu';
+import { Box3, DataTexture, EventDispatcher, LinearFilter, MathUtils, Vector2, Scene, PerspectiveCamera, Color, NoToneMapping, FloatType, HalfFloatType, Timer, StorageTexture, MeshBasicNodeMaterial, Matrix4, WebGPUCoordinateSystem } from 'three/webgpu';
 import { uv, uniform, varying } from 'three/tsl';
 import { SkinnedMeshBVH, MeshBVH, SAH } from 'three-mesh-bvh';
 import { ndcToCameraRay, rayStruct, wgslTagFn } from 'three-mesh-bvh/webgpu';
@@ -328,6 +328,16 @@ export class WebGPUPathTracer extends EventDispatcher {
 
 	set halfFloatAccumulation( value ) {
 
+		value = Boolean( value );
+		if ( this.halfFloatAccumulation === value ) {
+
+			return;
+
+		}
+
+		// Preview transitions copy this texture directly, so its storage format must match.
+		this._lowResTarget.dispose();
+		this._lowResTarget.type = value ? HalfFloatType : FloatType;
 		this._pathTracer.setHalfFloatAccumulation( value );
 		this.reset();
 
