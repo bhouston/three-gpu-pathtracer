@@ -1,4 +1,5 @@
-import { RGBAFormat, FloatType, Color, Vector2, WebGLRenderTarget, NoBlending, NormalBlending, Vector4, NearestFilter } from 'three';
+import { RGBAFormat, FloatType, HalfFloatType, Color, Vector2, WebGLRenderTarget, NoBlending, NormalBlending, Vector4, NearestFilter } from 'three';
+import { getAccumulationWeight } from '../utils/accumulationUtils.js';
 import { FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass.js';
 import { BlendMaterial } from '../materials/fullscreen/BlendMaterial.js';
 import { SobolNumberMapGenerator } from '../utils/SobolNumberMapGenerator.js';
@@ -25,15 +26,20 @@ function* renderTask() {
 
 	while ( true ) {
 
+		// All tiles in a pass must use the same weight. Coverage remains in alpha.
+		const sampleCount = Math.round( this.samples ) + 1;
+		const opacity = this._opacityFactor * ( this.halfFloatAccumulation ?
+			getAccumulationWeight( sampleCount ) : 1 / ( this.samples + 1 ) );
+
 		if ( alpha ) {
 
-			blendMaterial.opacity = this._opacityFactor / ( this.samples + 1 );
+			blendMaterial.opacity = opacity;
 			material.blending = NoBlending;
 			material.opacity = 1;
 
 		} else {
 
-			material.opacity = this._opacityFactor / ( this.samples + 1 );
+			material.opacity = opacity;
 			material.blending = NormalBlending;
 
 		}
@@ -150,6 +156,27 @@ function* renderTask() {
 
 const ogClearColor = new Color();
 export class PathTracingRenderer {
+
+	get halfFloatAccumulation() {
+
+		return this._primaryTarget.texture.type === HalfFloatType;
+
+	}
+
+	set halfFloatAccumulation( value ) {
+
+		const type = value ? HalfFloatType : FloatType;
+		if ( this._primaryTarget.texture.type === type ) return;
+		for ( const target of [ this._primaryTarget, ...this._blendTargets ] ) {
+
+			target.dispose();
+			target.texture.type = type;
+
+		}
+
+		this.reset();
+
+	}
 
 	get material() {
 

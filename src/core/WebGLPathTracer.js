@@ -16,6 +16,19 @@ function supportsFloatBlending( renderer ) {
 const _resolution = new Vector2();
 export class WebGLPathTracer {
 
+	get halfFloatAccumulation() {
+
+		return this._pathTracer.halfFloatAccumulation;
+
+	}
+
+	set halfFloatAccumulation( value ) {
+
+		this._pathTracer.halfFloatAccumulation = value;
+		this._lowResPathTracer.halfFloatAccumulation = value;
+
+	}
+
 	get multipleImportanceSampling() {
 
 		return Boolean( this._pathTracer.material.defines.FEATURE_MIS );

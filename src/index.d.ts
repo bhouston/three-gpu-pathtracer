@@ -118,6 +118,7 @@ export class WebGLPathTracer {
 	readonly scene: Scene | null;
 
 	multipleImportanceSampling: boolean;
+	halfFloatAccumulation: boolean;
 	bounces: number;
 	transmissiveBounces: number;
 	filterGlossyFactor: number;
