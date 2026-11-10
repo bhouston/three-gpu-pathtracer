@@ -1,5 +1,4 @@
 import { RGBAFormat, FloatType, HalfFloatType, Color, Vector2, WebGLRenderTarget, NoBlending, NormalBlending, Vector4, NearestFilter } from 'three';
-import { getAccumulationWeight } from '../utils/accumulationUtils.js';
 import { FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass.js';
 import { BlendMaterial } from '../materials/fullscreen/BlendMaterial.js';
 import { SobolNumberMapGenerator } from '../utils/SobolNumberMapGenerator.js';
@@ -26,11 +25,7 @@ function* renderTask() {
 
 	while ( true ) {
 
-		// All tiles in a pass must use the same weight. Coverage remains in alpha.
-		const sampleCount = Math.round( this.samples ) + 1;
-		// Specialized renderers with an opacity compensation factor retain their original weights.
-		const opacity = this._opacityFactor * ( this.halfFloatAccumulation && this._opacityFactor === 1 ?
-			getAccumulationWeight( sampleCount ) : 1 / ( this.samples + 1 ) );
+		const opacity = this._opacityFactor / ( this.samples + 1 );
 
 		if ( alpha ) {
 

@@ -152,7 +152,6 @@ export class WaveFrontPathTracer extends PathTracerBackend {
 		// Bind the actual texture formats before compiling the storage texture declarations.
 		this.logicKernel.outputTarget = this.outputTarget;
 		this.logicKernel.prevOutputTarget = this.prevOutputTarget;
-		this.logicKernel.halfFloatAccumulation = this.halfFloatAccumulation ? 1 : 0;
 
 		// recompile the kernels that bake in the scene, camera, random and shading model functions
 		this.logicKernel.needsUpdate = true;

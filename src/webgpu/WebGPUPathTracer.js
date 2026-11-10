@@ -314,8 +314,8 @@ export class WebGPUPathTracer extends EventDispatcher {
 	}
 
 	/**
-	 * Uses half precision color accumulation and bounded, normalized Halton sample weights.
-	 * Halves color target memory; intended for renders of at most about 1024 samples.
+	 * Uses half precision color accumulation with a uniform running average.
+	 * Halves color target memory. Small updates can stop resolving at high sample counts.
 	 * Precision and HDR range are reduced. Changing this setting resets the render.
 	 * @type {boolean}
 	 * @default false

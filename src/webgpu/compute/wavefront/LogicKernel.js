@@ -1,4 +1,3 @@
-import { accumulationWeightFn } from '../../nodes/accumulation.wgsl.js';
 import { StorageBufferAttribute } from 'three/webgpu';
 import { ComputeKernel } from '../ComputeKernel.js';
 import { createAuxTarget, createOutputTarget, createSampleCountTarget } from '../targets.js';
@@ -48,7 +47,6 @@ export class LogicKernel extends ComputeKernel {
 			clampIndirect: uniform( 10 ),
 			transmissiveBackground: uniform( TRANSMISSIVE_BACKGROUND_OVERLAY ),
 			accumulateAux: uniform( 0, 'uint' ),
-			halfFloatAccumulation: uniform( 0, 'uint' ),
 
 			rayDataStorage: storage( new StorageBufferAttribute( 1, 1 ), rayDataStruct ),
 			rayIntersectionsStorage: storage( new StorageBufferAttribute( 1, 1 ), intersectionResultStruct ),
@@ -85,7 +83,6 @@ export class LogicKernel extends ComputeKernel {
 				clampIndirect: f32,
 				transmissiveBackground: u32,
 				accumulateAux: u32,
-				halfFloatAccumulation: u32,
 
 				globalId: vec3u
 			) -> void {
@@ -362,7 +359,7 @@ export class LogicKernel extends ComputeKernel {
 					// blend the finished sample into the output and free the slot for a new camera ray
 					let sampleCount = storedSamples + 1;
 					let prevColor = textureLoad( ${ params.prevOutputTarget }, colorIndex );
-					let blendedColor = ${ weightedAlphaBlendFn }( prevColor, resultColor, ${ accumulationWeightFn }( sampleCount, halfFloatAccumulation ) );
+					let blendedColor = ${ weightedAlphaBlendFn }( prevColor, resultColor, 1.0 / f32( sampleCount ) );
 					textureStore( ${ params.sampleCountTarget }, indexUV, vec4( ${ SAMPLE_DISPATCHED_FLAG }u | sampleCount ) );
 					textureStore( ${ params.outputTarget }, colorIndex, blendedColor );
 

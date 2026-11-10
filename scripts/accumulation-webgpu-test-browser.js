@@ -1,9 +1,4 @@
-import { WebGPURenderer, Scene, PerspectiveCamera, Mesh, SphereGeometry, MeshStandardMaterial, Color, HalfFloatType, FloatType, DataUtils, StorageBufferAttribute } from 'three/webgpu';
-import { storage, globalId } from 'three/tsl';
-import { wgslTagFn } from 'three-mesh-bvh/webgpu';
-import { ComputeKernel } from '../src/webgpu/compute/ComputeKernel.js';
-import { getAccumulationWeight } from '../src/utils/accumulationUtils.js';
-import { accumulationWeightFn } from '../src/webgpu/nodes/accumulation.wgsl.js';
+import { WebGPURenderer, Scene, PerspectiveCamera, Mesh, SphereGeometry, MeshStandardMaterial, Color, HalfFloatType, FloatType, DataUtils } from 'three/webgpu';
 import { WebGPUPathTracer } from '../src/webgpu/index.js';
 
 // Runs on the adapter explicitly passed to Three.js. Every image read waits for GPU completion.
@@ -34,47 +29,6 @@ export async function runWebGPUTests() {
 
 		await renderer.init();
 		check( renderer.backend.isWebGPUBackend, 'Renderer did not initialize WebGPU' );
-		// Exercise the actual production WGSL helper independently of path radiance noise.
-		const weightCount = 4096;
-		const weightAttribute = new StorageBufferAttribute( weightCount * 2, 1 );
-		const weights = storage( weightAttribute, 'float', weightCount * 2 );
-		const weightShader = wgslTagFn/* wgsl */`
-			fn compute( globalId: vec3u ) -> void {
-
-				let index = globalId.x;
-				let n = index + 1u;
-				${ weights }[ index ] = ${ accumulationWeightFn }( n, 1u );
-				${ weights }[ index + 4096u ] = ${ accumulationWeightFn }( n, 0u );
-
-			}
-		`;
-		const weightKernel = new ComputeKernel( weightShader( { globalId } ) ).setWorkgroupSize( 64, 1, 1 );
-		try {
-
-			renderer.compute( weightKernel.kernel, [ weightCount / 64, 1, 1 ] );
-			await device.queue.onSubmittedWorkDone();
-			const gpuWeights = new Float32Array( await renderer.getArrayBufferAsync( weightAttribute ) );
-			let halfMaxRelativeError = 0;
-			let fullMaxRelativeError = 0;
-			for ( let index = 0; index < weightCount; index ++ ) {
-
-				const expectedHalf = getAccumulationWeight( index + 1 );
-				const expectedFull = 1 / ( index + 1 );
-				halfMaxRelativeError = Math.max( halfMaxRelativeError, Math.abs( gpuWeights[ index ] - expectedHalf ) / expectedHalf );
-				fullMaxRelativeError = Math.max( fullMaxRelativeError, Math.abs( gpuWeights[ index + weightCount ] - expectedFull ) / expectedFull );
-
-			}
-
-			check( halfMaxRelativeError <= 2e-7, 'JS/WGSL jitter weight mismatch: ' + halfMaxRelativeError );
-			check( fullMaxRelativeError <= 2e-7, 'Uniform full precision weight mismatch: ' + fullMaxRelativeError );
-			results.weightParity = { samples: weightCount, halfMaxRelativeError, fullMaxRelativeError, relativeTolerance: 2e-7 };
-
-		} finally {
-
-			weightKernel.dispose();
-
-		}
-
 		renderer.setSize( 24, 24 );
 		const scene = new Scene();
 		scene.add( new Mesh( geometry, material ) );
