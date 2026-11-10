@@ -24,6 +24,7 @@ export class PathTracerBackend {
 
 		// stop taking samples once a pixel reaches this count. zero means no limit.
 		this.maxSamples = 0;
+		this.halfFloatAccumulation = false;
 
 		// whether kernels compile asynchronously before their first dispatch rather than on it
 		this.asyncCompile = false;
@@ -78,6 +79,29 @@ export class PathTracerBackend {
 		}
 
 		this.reset();
+
+	}
+
+	setHalfFloatAccumulation( value ) {
+
+		value = Boolean( value );
+		if ( this.halfFloatAccumulation === value ) {
+
+			return;
+
+		}
+
+		this.halfFloatAccumulation = value;
+		const { width, height } = this.outputTarget;
+		this.outputTarget.dispose();
+		this.prevOutputTarget.dispose();
+		this.outputTarget = createOutputTarget( 'Output #0', value );
+		this.prevOutputTarget = createOutputTarget( 'Output #1', value );
+		this.outputTarget.setSize( width, height );
+		this.prevOutputTarget.setSize( width, height );
+		this.outputTargetClearKernel.target = this.outputTarget;
+		this.outputTargetClearKernel.needsUpdate = true;
+		this.rebuild();
 
 	}
 

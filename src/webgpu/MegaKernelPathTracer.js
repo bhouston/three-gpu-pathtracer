@@ -78,6 +78,10 @@ export class MegaKernelPathTracer extends PathTracerBackend {
 	rebuild() {
 
 		super.rebuild();
+		// Bind the actual texture formats before compiling the storage texture declarations.
+		this.kernel.outputTarget = this.outputTarget;
+		this.kernel.prevOutputTarget = this.prevOutputTarget;
+		this.kernel.halfFloatAccumulation = this.halfFloatAccumulation ? 1 : 0;
 		this.kernel.needsUpdate = true;
 		this.reset();
 

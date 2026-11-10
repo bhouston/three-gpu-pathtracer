@@ -332,6 +332,25 @@ Maximum number of scatter events a path can take inside a subsurface scattering 
 separately from [WebGPUPathTracer#maxBounces](WebGPUPathTracer#maxBounces). Paths that reach it end, darkening dense volumes.
 
 
+### .halfFloatAccumulation
+
+```js
+halfFloatAccumulation: boolean = false
+```
+
+Uses RGBA16F instead of RGBA32F for both color accumulation textures, halving their memory.
+The sample count texture remains R32Uint, so these three textures together use 20 rather
+than 36 bytes per pixel. The number of textures is unchanged.
+
+Half precision uses bounded, paired Halton sample weights with exact normalization. Each
+pair sums to two; alpha retains its coverage meaning. This adapts the jittered weighting
+technique rather than storing cumulative weights in alpha. Full precision retains uniform weights.
+
+Intended for renders of at most about 1024 samples. Quality depends on the scene and no
+high sample count accuracy is guaranteed. HDR values above 65504 cannot be represented;
+use full precision for extreme lighting or higher precision requirements. Changing the
+setting reallocates the color targets, rebuilds the kernels, and resets accumulation.
+
 ### .maxSamples
 
 ```js

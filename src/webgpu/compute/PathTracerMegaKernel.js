@@ -1,3 +1,4 @@
+import { accumulationWeightFn } from '../nodes/accumulation.wgsl.js';
 import { DataTexture, Vector2 } from 'three/webgpu';
 import { ComputeKernel } from './ComputeKernel.js';
 import { createAuxTarget, createOutputTarget, createSampleCountTarget } from './targets.js';
@@ -47,6 +48,7 @@ export class PathTracerMegaKernel extends ComputeKernel {
 
 			transmissiveBackground: uniform( TRANSMISSIVE_BACKGROUND_OVERLAY ),
 			accumulateAux: uniform( 0, 'uint' ),
+			halfFloatAccumulation: uniform( 0, 'uint' ),
 
 			// the per pixel first hit albedo and normal, as running means like the color
 			auxTarget: textureStore( createAuxTarget() ).toReadWrite(),
@@ -110,6 +112,7 @@ export class PathTracerMegaKernel extends ComputeKernel {
 
 				transmissiveBackground: u32,
 				accumulateAux: u32,
+				halfFloatAccumulation: u32,
 
 			) -> void {
 
@@ -595,7 +598,7 @@ export class PathTracerMegaKernel extends ComputeKernel {
 				let colorIndex = vec2u( indexUV.x, targetDimensions.y - 1u - indexUV.y );
 
 				let prevColor = textureLoad( ${ params.prevOutputTarget }, colorIndex );
-				let blendedColor = ${ weightedAlphaBlendFn }( prevColor, resultColor, 1.0 / f32( nextSampleCount ) );
+				let blendedColor = ${ weightedAlphaBlendFn }( prevColor, resultColor, ${ accumulationWeightFn }( nextSampleCount, halfFloatAccumulation ) );
 				textureStore( ${ params.sampleCountTarget }, indexUV, vec4( nextSampleCount ) );
 				textureStore( ${ params.outputTarget }, colorIndex, blendedColor );
 

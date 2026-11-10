@@ -6,11 +6,11 @@ import { AUX_LAYERS } from '../nodes/auxiliary.wgsl.js';
 // their pipelines are compiled against the formats they are dispatched with.
 
 // the color accumulation, in the working color space
-export function createOutputTarget( name = '' ) {
+export function createOutputTarget( name = '', halfFloat = false ) {
 
 	const target = new StorageTexture( 1, 1 );
 	target.format = RGBAFormat;
-	target.type = FloatType;
+	target.type = halfFloat ? HalfFloatType : FloatType;
 	target.colorSpace = ColorManagement.workingColorSpace;
 	target.name = name;
 	target.generateMipmaps = false;

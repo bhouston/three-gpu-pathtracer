@@ -314,6 +314,26 @@ export class WebGPUPathTracer extends EventDispatcher {
 	}
 
 	/**
+	 * Uses half precision color accumulation and bounded, normalized Halton sample weights.
+	 * Halves color target memory; intended for renders of at most about 1024 samples.
+	 * Precision and HDR range are reduced. Changing this setting resets the render.
+	 * @type {boolean}
+	 * @default false
+	 */
+	get halfFloatAccumulation() {
+
+		return this._pathTracer.halfFloatAccumulation;
+
+	}
+
+	set halfFloatAccumulation( value ) {
+
+		this._pathTracer.setHalfFloatAccumulation( value );
+		this.reset();
+
+	}
+
+	/**
 	 * Stops accumulating once every pixel reaches this many samples. A denoiser only runs once the
 	 * render has stopped, so it has no effect while this is `0`.
 	 * @type {number}
@@ -574,10 +594,12 @@ export class WebGPUPathTracer extends EventDispatcher {
 	useMegakernel( value ) {
 
 		const maxSamples = this._pathTracer.maxSamples;
+		const halfFloatAccumulation = this.halfFloatAccumulation;
 
 		this._pathTracer.dispose();
 		this._pathTracer = value ? new MegaKernelPathTracer( this._renderer ) : new WaveFrontPathTracer( this._renderer );
 		this._pathTracer.maxSamples = maxSamples;
+		this._pathTracer.setHalfFloatAccumulation( halfFloatAccumulation );
 		this._timingCount = 0;
 		this._pathTracer.setBVHData( this._bvhData );
 		this._pathTracer.setShadingModel( this._shadingModel );
