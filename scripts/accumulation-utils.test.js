@@ -1,44 +1,27 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { getAccumulationWeight } from '../src/utils/accumulationUtils.js';
+import { compareImages } from './precision-experiment-browser.js';
 
-test( 'paired weights normalize a weighted mean exactly without storing cumulative weight', () => {
+test( 'precision metrics exclude coverage and measure linear and display differences separately', () => {
 
-	let mean = 0;
-	let sum = 0;
-	let total = 0;
-	for ( let n = 1; n <= 8192; n ++ ) {
-
-		const pair = Math.floor( ( n - 1 ) / 2 ) + 1;
-		const digits = pair.toString( 2 ).split( '' ).reverse();
-		const halton = digits.reduce( ( value, digit, i ) => value + Number( digit ) * 2 ** ( - i - 1 ), 0 );
-		const amplitude = Math.min( ( 2 * pair - 1 ) / 2048, 0.5 ) * ( 2 * halton - 1 );
-		const weight = n % 2 ? 1 + amplitude : 1 - amplitude;
-		const value = Math.sin( n * 0.71 ) + 2;
-		sum += value * weight;
-		total += weight;
-		const factor = getAccumulationWeight( n );
-		assert.ok( factor > 0 && factor <= 1 );
-		mean = mean * ( 1 - factor ) + value * factor;
-		assert.ok( Math.abs( mean - sum / total ) < 1e-12 );
-		if ( n % 2 === 0 ) assert.equal( total, n );
-
-	}
+	const full = new Float32Array( [ 1, 1, 1, 1, 1, 1, 1, 0 ] );
+	const half = new Float32Array( [ 0.5, 0.5, 0.5, 0, 0.5, 0.5, 0.5, 1 ] );
+	const result = compareImages( half, full );
+	assert.equal( result.rgbRMSE, 0.5 );
+	assert.equal( result.normalizedRMSE, 0.5 );
+	assert.equal( result.meanBias, - 0.5 );
+	assert.equal( result.p99AbsoluteError, 0.5 );
+	assert.equal( result.maxAbsoluteError, 0.5 );
+	assert.ok( result.displayRMSE > 0 && result.displayRMSE < result.rgbRMSE );
+	assert.equal( result.nonfinite, 0 );
 
 } );
 
-test( 'normalized weights preserve constant color and coverage', () => {
+test( 'precision metrics detect nonfinite output and identical images', () => {
 
-	let alpha = 0;
-	let premultiplied = 0;
-	for ( let n = 1; n <= 4096; n ++ ) {
-
-		const factor = getAccumulationWeight( n );
-		alpha = alpha * ( 1 - factor ) + 0.35 * factor;
-		premultiplied = premultiplied * ( 1 - factor ) + 2.5 * 0.35 * factor;
-		assert.ok( Math.abs( alpha - 0.35 ) < 1e-12 );
-		assert.ok( Math.abs( premultiplied / alpha - 2.5 ) < 1e-12 );
-
-	}
+	const full = new Float32Array( [ 1, 2, 3, 1 ] );
+	assert.equal( compareImages( full, full ).rgbRMSE, 0 );
+	assert.equal( compareImages( full, full ).displayRMSE, 0 );
+	assert.equal( compareImages( new Float32Array( [ Infinity, 2, 3, 1 ] ), full ).nonfinite, 1 );
 
 } );
