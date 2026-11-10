@@ -1,0 +1,371 @@
+{
+  "hardware": {
+    "gpu": "NVIDIA GeForce GTX 1050",
+    "vendor": "nvidia",
+    "architecture": "pascal",
+    "platform": "Windows / Chrome / WebGPU",
+    "softwareFallback": false
+  },
+  "benchmarks": [
+    {
+      "sceneId": "studio",
+      "backend": "mega",
+      "width": 768,
+      "height": 512,
+      "trials": [
+        {
+          "precision": "float32",
+          "seconds": 5.1305,
+          "completedUpdates": 112,
+          "completedSampleFrames": 112,
+          "sampleFramesPerSecond": 21.830230971640194,
+          "updatesPerSecond": 21.830230971640194
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.108800000190735,
+          "completedUpdates": 112,
+          "completedSampleFrames": 112,
+          "sampleFramesPerSecond": 21.922956466453673,
+          "updatesPerSecond": 21.922956466453673
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.107199999809265,
+          "completedUpdates": 112,
+          "completedSampleFrames": 112,
+          "sampleFramesPerSecond": 21.929824562222507,
+          "updatesPerSecond": 21.929824562222507
+        },
+        {
+          "precision": "float32",
+          "seconds": 5.130099999904632,
+          "completedUpdates": 112,
+          "completedSampleFrames": 112,
+          "sampleFramesPerSecond": 21.831933101125134,
+          "updatesPerSecond": 21.831933101125134
+        }
+      ],
+      "summary": {
+        "float32SampleFramesPerSecond": 21.831082003204685,
+        "float16SampleFramesPerSecond": 21.926389976507437,
+        "relativeSpeedChange": 0.004365700852058563
+      }
+    },
+    {
+      "sceneId": "studio",
+      "backend": "wavefront",
+      "width": 768,
+      "height": 512,
+      "trials": [
+        {
+          "precision": "float32",
+          "seconds": 5.286099999904633,
+          "completedUpdates": 240,
+          "completedSampleFrames": 157.6808115641276,
+          "sampleFramesPerSecond": 29.829328156291467,
+          "updatesPerSecond": 45.402092280571665
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.266599999904632,
+          "completedUpdates": 240,
+          "completedSampleFrames": 157.65055084228516,
+          "sampleFramesPerSecond": 29.9340278063912,
+          "updatesPerSecond": 45.570197091927604
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.270699999809265,
+          "completedUpdates": 240,
+          "completedSampleFrames": 157.65055084228516,
+          "sampleFramesPerSecond": 29.910742567019593,
+          "updatesPerSecond": 45.53474870675338
+        },
+        {
+          "precision": "float32",
+          "seconds": 5.299,
+          "completedUpdates": 240,
+          "completedSampleFrames": 157.65055084228516,
+          "sampleFramesPerSecond": 29.75100034766657,
+          "updatesPerSecond": 45.2915644461219
+        }
+      ],
+      "summary": {
+        "float32SampleFramesPerSecond": 29.79011652315554,
+        "float16SampleFramesPerSecond": 29.922380656632264,
+        "relativeSpeedChange": 0.004439866268193926
+      }
+    },
+    {
+      "sceneId": "cornell",
+      "backend": "mega",
+      "width": 768,
+      "height": 512,
+      "trials": [
+        {
+          "precision": "float32",
+          "seconds": 6.604200000286102,
+          "completedUpdates": 64,
+          "completedSampleFrames": 64,
+          "sampleFramesPerSecond": 9.690802822026503,
+          "updatesPerSecond": 9.690802822026503
+        },
+        {
+          "precision": "float16",
+          "seconds": 6.591,
+          "completedUpdates": 64,
+          "completedSampleFrames": 64,
+          "sampleFramesPerSecond": 9.710210893642847,
+          "updatesPerSecond": 9.710210893642847
+        },
+        {
+          "precision": "float16",
+          "seconds": 6.589099999904633,
+          "completedUpdates": 64,
+          "completedSampleFrames": 64,
+          "sampleFramesPerSecond": 9.713010881748085,
+          "updatesPerSecond": 9.713010881748085
+        },
+        {
+          "precision": "float32",
+          "seconds": 6.603099999904632,
+          "completedUpdates": 64,
+          "completedSampleFrames": 64,
+          "sampleFramesPerSecond": 9.692417198122753,
+          "updatesPerSecond": 9.692417198122753
+        }
+      ],
+      "summary": {
+        "float32SampleFramesPerSecond": 9.691609942846114,
+        "float16SampleFramesPerSecond": 9.711610685876902,
+        "relativeSpeedChange": 0.0020637172924558023
+      }
+    },
+    {
+      "sceneId": "cornell",
+      "backend": "wavefront",
+      "width": 768,
+      "height": 512,
+      "trials": [
+        {
+          "precision": "float32",
+          "seconds": 5.1472000002861025,
+          "completedUpdates": 192,
+          "completedSampleFrames": 91.3962631225586,
+          "sampleFramesPerSecond": 17.75650122736214,
+          "updatesPerSecond": 37.30183400476528
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.125900000095368,
+          "completedUpdates": 192,
+          "completedSampleFrames": 91.40336608886719,
+          "sampleFramesPerSecond": 17.831671723437175,
+          "updatesPerSecond": 37.45683684746636
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.133400000095367,
+          "completedUpdates": 192,
+          "completedSampleFrames": 91.40336608886719,
+          "sampleFramesPerSecond": 17.805619294652494,
+          "updatesPerSecond": 37.40211166019267
+        },
+        {
+          "precision": "float32",
+          "seconds": 5.158099999904633,
+          "completedUpdates": 192,
+          "completedSampleFrames": 91.40336608886719,
+          "sampleFramesPerSecond": 17.72035557483514,
+          "updatesPerSecond": 37.22300847280003
+        }
+      ],
+      "summary": {
+        "float32SampleFramesPerSecond": 17.73840928532332,
+        "float16SampleFramesPerSecond": 17.818635986308593,
+        "relativeSpeedChange": 0.004522767498191138
+      }
+    },
+    {
+      "sceneId": "glossy",
+      "backend": "mega",
+      "width": 768,
+      "height": 512,
+      "trials": [
+        {
+          "precision": "float32",
+          "seconds": 5.483100000381469,
+          "completedUpdates": 112,
+          "completedSampleFrames": 112,
+          "sampleFramesPerSecond": 20.42640112203096,
+          "updatesPerSecond": 20.42640112203096
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.464800000190735,
+          "completedUpdates": 112,
+          "completedSampleFrames": 112,
+          "sampleFramesPerSecond": 20.494803102783436,
+          "updatesPerSecond": 20.494803102783436
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.464799999713898,
+          "completedUpdates": 112,
+          "completedSampleFrames": 112,
+          "sampleFramesPerSecond": 20.494803104571734,
+          "updatesPerSecond": 20.494803104571734
+        },
+        {
+          "precision": "float32",
+          "seconds": 5.482299999713898,
+          "completedUpdates": 112,
+          "completedSampleFrames": 112,
+          "sampleFramesPerSecond": 20.429381829860624,
+          "updatesPerSecond": 20.429381829860624
+        }
+      ],
+      "summary": {
+        "float32SampleFramesPerSecond": 20.427891367214315,
+        "float16SampleFramesPerSecond": 20.494803103677587,
+        "relativeSpeedChange": 0.003275508727771159
+      }
+    },
+    {
+      "sceneId": "glossy",
+      "backend": "wavefront",
+      "width": 768,
+      "height": 512,
+      "trials": [
+        {
+          "precision": "float32",
+          "seconds": 5.07189999961853,
+          "completedUpdates": 224,
+          "completedSampleFrames": 150.6238784790039,
+          "sampleFramesPerSecond": 29.697722449246374,
+          "updatesPerSecond": 44.16490861745058
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.040900000095368,
+          "completedUpdates": 224,
+          "completedSampleFrames": 150.6238784790039,
+          "sampleFramesPerSecond": 29.88035439626937,
+          "updatesPerSecond": 44.436509352647775
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.043599999904632,
+          "completedUpdates": 224,
+          "completedSampleFrames": 150.6238784790039,
+          "sampleFramesPerSecond": 29.86435849033468,
+          "updatesPerSecond": 44.41272107308976
+        },
+        {
+          "precision": "float32",
+          "seconds": 5.069,
+          "completedUpdates": 224,
+          "completedSampleFrames": 150.6238784790039,
+          "sampleFramesPerSecond": 29.714712661077908,
+          "updatesPerSecond": 44.19017557703689
+        }
+      ],
+      "summary": {
+        "float32SampleFramesPerSecond": 29.706215125811305,
+        "float16SampleFramesPerSecond": 29.872354301949308,
+        "relativeSpeedChange": 0.005592741297885784
+      }
+    },
+    {
+      "sceneId": "gradient",
+      "backend": "mega",
+      "width": 768,
+      "height": 512,
+      "trials": [
+        {
+          "precision": "float32",
+          "seconds": 5.2085,
+          "completedUpdates": 192,
+          "completedSampleFrames": 192,
+          "sampleFramesPerSecond": 36.862820389747526,
+          "updatesPerSecond": 36.862820389747526
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.145799999713898,
+          "completedUpdates": 192,
+          "completedSampleFrames": 192,
+          "sampleFramesPerSecond": 37.311982589815976,
+          "updatesPerSecond": 37.311982589815976
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.145400000095368,
+          "completedUpdates": 192,
+          "completedSampleFrames": 192,
+          "sampleFramesPerSecond": 37.314883195950046,
+          "updatesPerSecond": 37.314883195950046
+        },
+        {
+          "precision": "float32",
+          "seconds": 5.1626999998092655,
+          "completedUpdates": 192,
+          "completedSampleFrames": 192,
+          "sampleFramesPerSecond": 37.18984252563453,
+          "updatesPerSecond": 37.18984252563453
+        }
+      ],
+      "summary": {
+        "float32SampleFramesPerSecond": 37.025609380501976,
+        "float16SampleFramesPerSecond": 37.313432836512455,
+        "relativeSpeedChange": 0.007773631840940043
+      }
+    },
+    {
+      "sceneId": "gradient",
+      "backend": "wavefront",
+      "width": 768,
+      "height": 512,
+      "trials": [
+        {
+          "precision": "float32",
+          "seconds": 5.045,
+          "completedUpdates": 304,
+          "completedSampleFrames": 152,
+          "sampleFramesPerSecond": 30.128840436075322,
+          "updatesPerSecond": 60.257680872150644
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.005599999904633,
+          "completedUpdates": 304,
+          "completedSampleFrames": 152,
+          "sampleFramesPerSecond": 30.365990091676505,
+          "updatesPerSecond": 60.73198018335301
+        },
+        {
+          "precision": "float16",
+          "seconds": 5.017099999904633,
+          "completedUpdates": 304,
+          "completedSampleFrames": 152,
+          "sampleFramesPerSecond": 30.29638635922929,
+          "updatesPerSecond": 60.59277271845858
+        },
+        {
+          "precision": "float32",
+          "seconds": 5.047100000381469,
+          "completedUpdates": 304,
+          "completedSampleFrames": 152,
+          "sampleFramesPerSecond": 30.116304410158616,
+          "updatesPerSecond": 60.23260882031723
+        }
+      ],
+      "summary": {
+        "float32SampleFramesPerSecond": 30.12257111884634,
+        "float16SampleFramesPerSecond": 30.331148293951248,
+        "relativeSpeedChange": 0.006924281937354504
+      }
+    }
+  ]
+}

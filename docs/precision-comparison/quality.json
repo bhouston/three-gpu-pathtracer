@@ -1,0 +1,295 @@
+{
+  "hardware": {
+    "gpu": "NVIDIA GeForce GTX 1050",
+    "vendor": "nvidia",
+    "architecture": "pascal",
+    "platform": "Windows / Chrome / WebGPU",
+    "softwareFallback": false
+  },
+  "scenes": [
+    {
+      "sceneId": "studio",
+      "backend": "mega",
+      "width": 192,
+      "height": 128,
+      "rows": [
+        {
+          "samples": 64,
+          "rgbRMSE": 0.0013380704709909724,
+          "normalizedRMSE": 0.006948404873317147,
+          "displayRMSE": 0.0013142219999155796,
+          "meanBias": -0.005483770788525296,
+          "p99AbsoluteError": 0.0036787986755371094,
+          "maxAbsoluteError": 0.007974207401275635,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.0015066288838790954,
+          "float16VersusFinal": 0.002006920280933928
+        },
+        {
+          "samples": 256,
+          "rgbRMSE": 0.005180208290837379,
+          "normalizedRMSE": 0.02689976995867473,
+          "displayRMSE": 0.005150222416471493,
+          "meanBias": -0.021240114297429245,
+          "p99AbsoluteError": 0.01482364535331726,
+          "maxAbsoluteError": 0.022878974676132202,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.0006175731069631396,
+          "float16VersusFinal": 0.0052136946157680265
+        },
+        {
+          "samples": 1024,
+          "rgbRMSE": 0.019720560373585577,
+          "normalizedRMSE": 0.10240637106491424,
+          "displayRMSE": 0.020193308668765654,
+          "meanBias": -0.08043901026647324,
+          "p99AbsoluteError": 0.03787991404533386,
+          "maxAbsoluteError": 0.06797540187835693,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.00026837472003930876,
+          "float16VersusFinal": 0.019722970827045026
+        },
+        {
+          "samples": 4096,
+          "rgbRMSE": 0.042715146416047,
+          "normalizedRMSE": 0.22181356686808648,
+          "displayRMSE": 0.048334842037701026,
+          "meanBias": -0.1743304712462377,
+          "p99AbsoluteError": 0.09664416313171387,
+          "maxAbsoluteError": 0.16096144914627075,
+          "nonfinite": 0,
+          "float32VersusFinal": 0,
+          "float16VersusFinal": 0.042715146416047
+        }
+      ],
+      "repeatFloat32MaxError": 0,
+      "stagnation": {
+        "interval": [
+          1024,
+          4096
+        ],
+        "floatChangedChannels": 42887,
+        "halfUnchangedAmongThose": 0,
+        "fraction": 0
+      },
+      "crop": {
+        "x": 83,
+        "y": 22,
+        "size": 40
+      }
+    },
+    {
+      "sceneId": "cornell",
+      "backend": "mega",
+      "width": 192,
+      "height": 128,
+      "rows": [
+        {
+          "samples": 64,
+          "rgbRMSE": 0.001197075310882542,
+          "normalizedRMSE": 0.011706780701215645,
+          "displayRMSE": 0.0012719012175128178,
+          "meanBias": -0.011433977654138618,
+          "p99AbsoluteError": 0.004189610481262207,
+          "maxAbsoluteError": 0.008762896060943604,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.0036564806721153184,
+          "float16VersusFinal": 0.003810990393154293
+        },
+        {
+          "samples": 256,
+          "rgbRMSE": 0.004602187649244192,
+          "normalizedRMSE": 0.04502879603512677,
+          "displayRMSE": 0.004963649264965802,
+          "meanBias": -0.04406490499913479,
+          "p99AbsoluteError": 0.0160711407661438,
+          "maxAbsoluteError": 0.024137139320373535,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.0016032220333299235,
+          "float16VersusFinal": 0.004855257225174117
+        },
+        {
+          "samples": 1024,
+          "rgbRMSE": 0.01634782103195697,
+          "normalizedRMSE": 0.159963907253513,
+          "displayRMSE": 0.018470380968069494,
+          "meanBias": -0.1568015153175389,
+          "p99AbsoluteError": 0.06308236718177795,
+          "maxAbsoluteError": 0.06746137142181396,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.0007028305509243489,
+          "float16VersusFinal": 0.016363218922829877
+        },
+        {
+          "samples": 4096,
+          "rgbRMSE": 0.04001098779408557,
+          "normalizedRMSE": 0.3914948626062549,
+          "displayRMSE": 0.0523194449065559,
+          "meanBias": -0.3907827535967483,
+          "p99AbsoluteError": 0.1423434317111969,
+          "maxAbsoluteError": 0.2304992377758026,
+          "nonfinite": 0,
+          "float32VersusFinal": 0,
+          "float16VersusFinal": 0.04001098779408557
+        }
+      ],
+      "repeatFloat32MaxError": 0,
+      "stagnation": {
+        "interval": [
+          1024,
+          4096
+        ],
+        "floatChangedChannels": 53520,
+        "halfUnchangedAmongThose": 0,
+        "fraction": 0
+      },
+      "crop": {
+        "x": 69,
+        "y": 50,
+        "size": 40
+      }
+    },
+    {
+      "sceneId": "glossy",
+      "backend": "mega",
+      "width": 192,
+      "height": 128,
+      "rows": [
+        {
+          "samples": 64,
+          "rgbRMSE": 0.018366048042755104,
+          "normalizedRMSE": 0.011818272705483702,
+          "displayRMSE": 0.0014509080886260072,
+          "meanBias": -0.011439609031564235,
+          "p99AbsoluteError": 0.017676830291748047,
+          "maxAbsoluteError": 1.022613525390625,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.07619835991204638,
+          "float16VersusFinal": 0.06947899198495382
+        },
+        {
+          "samples": 256,
+          "rgbRMSE": 0.06705658856871169,
+          "normalizedRMSE": 0.04412184201672153,
+          "displayRMSE": 0.005681571895673128,
+          "meanBias": -0.04405250045667275,
+          "p99AbsoluteError": 0.06618499755859375,
+          "maxAbsoluteError": 4.3105010986328125,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.04483843886704263,
+          "float16VersusFinal": 0.07959825503118285
+        },
+        {
+          "samples": 1024,
+          "rgbRMSE": 0.22724900964252012,
+          "normalizedRMSE": 0.14899553748557584,
+          "displayRMSE": 0.020716157938086035,
+          "meanBias": -0.15288673388571328,
+          "p99AbsoluteError": 0.26622867584228516,
+          "maxAbsoluteError": 12.913955688476562,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.018817131142174048,
+          "float16VersusFinal": 0.22332917627028742
+        },
+        {
+          "samples": 4096,
+          "rgbRMSE": 0.6820029185717782,
+          "normalizedRMSE": 0.44846604609008783,
+          "displayRMSE": 0.05641546616257403,
+          "meanBias": -0.37117544560275734,
+          "p99AbsoluteError": 0.6693664789199829,
+          "maxAbsoluteError": 36.18549346923828,
+          "nonfinite": 0,
+          "float32VersusFinal": 0,
+          "float16VersusFinal": 0.6820029185717782
+        }
+      ],
+      "repeatFloat32MaxError": 0,
+      "stagnation": {
+        "interval": [
+          1024,
+          4096
+        ],
+        "floatChangedChannels": 44268,
+        "halfUnchangedAmongThose": 8,
+        "fraction": 0.00018071744826963042
+      },
+      "crop": {
+        "x": 43,
+        "y": 60,
+        "size": 40
+      }
+    },
+    {
+      "sceneId": "gradient",
+      "backend": "mega",
+      "width": 192,
+      "height": 128,
+      "rows": [
+        {
+          "samples": 64,
+          "rgbRMSE": 0.0013557721432056046,
+          "normalizedRMSE": 0.001744934327703345,
+          "displayRMSE": 0.000501178177120042,
+          "meanBias": -0.0009450733198607597,
+          "p99AbsoluteError": 0.007509291172027588,
+          "maxAbsoluteError": 0.010131001472473145,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.00021790851785354843,
+          "float16VersusFinal": 0.001357649377070035
+        },
+        {
+          "samples": 256,
+          "rgbRMSE": 0.0038413395592816835,
+          "normalizedRMSE": 0.004943974610194243,
+          "displayRMSE": 0.0010600266586434524,
+          "meanBias": -0.0014770876594574862,
+          "p99AbsoluteError": 0.030548155307769775,
+          "maxAbsoluteError": 0.03463447093963623,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.00005430765684412623,
+          "float16VersusFinal": 0.0038390036492434235
+        },
+        {
+          "samples": 1024,
+          "rgbRMSE": 0.011919522806070344,
+          "normalizedRMSE": 0.015340962073283984,
+          "displayRMSE": 0.00327826515620373,
+          "meanBias": -0.0029292611311308183,
+          "p99AbsoluteError": 0.08451968431472778,
+          "maxAbsoluteError": 0.12687033414840698,
+          "nonfinite": 0,
+          "float32VersusFinal": 0.000011857547159358122,
+          "float16VersusFinal": 0.011919544324234874
+        },
+        {
+          "samples": 4096,
+          "rgbRMSE": 0.017032065958231993,
+          "normalizedRMSE": 0.021921035783582694,
+          "displayRMSE": 0.005679728693884866,
+          "meanBias": -0.003826222205676873,
+          "p99AbsoluteError": 0.12538152933120728,
+          "maxAbsoluteError": 0.19210773706436157,
+          "nonfinite": 0,
+          "float32VersusFinal": 0,
+          "float16VersusFinal": 0.017032065958231993
+        }
+      ],
+      "repeatFloat32MaxError": 0,
+      "stagnation": {
+        "interval": [
+          1024,
+          4096
+        ],
+        "floatChangedChannels": 1405,
+        "halfUnchangedAmongThose": 23,
+        "fraction": 0.016370106761565837
+      },
+      "crop": {
+        "x": 0,
+        "y": 44,
+        "size": 40
+      }
+    }
+  ]
+}
