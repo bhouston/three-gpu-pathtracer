@@ -24,8 +24,11 @@ export class WebGLPathTracer {
 
 	set halfFloatAccumulation( value ) {
 
+		if ( this.halfFloatAccumulation === Boolean( value ) ) return;
+
 		this._pathTracer.halfFloatAccumulation = value;
 		this._lowResPathTracer.halfFloatAccumulation = value;
+		this.reset();
 
 	}
 
