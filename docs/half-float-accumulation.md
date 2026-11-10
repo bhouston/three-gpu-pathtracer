@@ -98,6 +98,8 @@ WebGPU tests validate both kernels with GPU-completed readbacks, full/half/full
 switching, reset sample counts, resizing, backend switching, constant emissive
 radiance, transparent corners, opaque centers and the preview transition. These
 are correctness checks; the image-error table above is the WebGL experiment.
+GPU storage-buffer readback also checks both weight formulas against JavaScript
+for samples 1–4,096; the maximum relative difference was 1.42e-7.
 No sustained throughput benchmark was performed, and no speedup is claimed.
 
 Recommendation: keep float32 as the default. The half mode offers a real color
